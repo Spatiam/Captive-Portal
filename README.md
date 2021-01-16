@@ -6,6 +6,17 @@ sudo -i
 sudo bash /home/pi/Captive-Portal/captiveportal.sh $0
 ```
 
+```
+sudo raspi-config
+5
+L4
+US
+sudo systemctl restart hostapd.service
+sudo reboot
+```
+
+
+
 Below sites needs to be resolvable to public IPs for CP to work
 connectivitycheck.gstatic.com
 www.gstatic.com
