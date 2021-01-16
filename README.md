@@ -3,7 +3,7 @@ sudo -i
 ```
 
 ```
-curl -H 'Cache-Control: no-cache' -sSL https://raw.githubusercontent.com/tretos53/Captive-Portal/master/captiveportal.sh | sudo bash $0
+sudo bash /home/pi/Captive-Portal/captiveportal.sh $0
 ```
 
 Below sites needs to be resolvable to public IPs for CP to work
