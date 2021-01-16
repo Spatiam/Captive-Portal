@@ -1,3 +1,9 @@
+#### Install
+
+```
+git clone https://github.com/Spatiam/Captive-Portal.git
+```
+
 ```
 sudo -i
 ```
@@ -5,6 +11,8 @@ sudo -i
 ```
 sudo bash /home/pi/Captive-Portal/captiveportal.sh $0
 ```
+
+RPi will reboot - IP Address may change
 
 ```
 sudo raspi-config
@@ -15,7 +23,7 @@ sudo systemctl restart hostapd.service
 sudo reboot
 ```
 
-
+#### Additional
 
 Below sites needs to be resolvable to public IPs for CP to work
 connectivitycheck.gstatic.com
@@ -35,8 +43,6 @@ Check nginx logs
 #### Other
 
 ```
-
-
 # Go to /var/logs/
 cd /var/logs/
 
@@ -45,7 +51,6 @@ find . -name '*.gz' -execdir gunzip '{}' \;
 
 # Find MAC addresses in all files and dont show duplicates and other stuff
 grep -hoiIs '[0-9A-F]\{2\}\(:[0-9A-F]\{2\}\)\{5\}' * | sort -u
-
 
 NGINX logs
 # Go to /var/logs/
