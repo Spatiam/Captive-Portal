@@ -19,9 +19,9 @@ echo "┌───────────────────────�
 echo "|Installing and configuring nginx"
 echo "└─────────────────────────────────────────"
 apt-get install nginx -yqq
-cp /home/pi/Captive-Portal/default_nginx /etc/nginx/sites-enabled/default
-cp /home/pi/Captive-Portal/index.php /var/www/html/index.php
-cp /home/pi/Captive-Portal/data.txt /var/www/html/data.txt
+cp -u /home/pi/Captive-Portal/default_nginx /etc/nginx/sites-enabled/default
+cp -u /home/pi/Captive-Portal/index.php /var/www/html/index.php
+cp -u /home/pi/Captive-Portal/data.txt /var/www/html/data.txt
 
 echo "┌─────────────────────────────────────────"
 echo "|Installing dnsmasq"
@@ -31,12 +31,12 @@ apt-get install dnsmasq -yqq
 echo "┌─────────────────────────────────────────"
 echo "|Configuring wlan0"
 echo "└─────────────────────────────────────────"
-cp /home/pi/Captive-Portal/dhcpcd.conf /etc/dhcpcd.conf
+cp -u /home/pi/Captive-Portal/dhcpcd.conf /etc/dhcpcd.conf
 
 echo "┌─────────────────────────────────────────"
 echo "|Configuring dnsmasq"
 echo "└─────────────────────────────────────────"
-cp /home/pi/Captive-Portal/dnsmasq.conf /etc/dnsmasq.conf
+cp -u /home/pi/Captive-Portal/dnsmasq.conf /etc/dnsmasq.conf
 
 echo "┌─────────────────────────────────────────"
 echo "|Configuring dnsmasq to start at boot"
@@ -51,7 +51,7 @@ apt-get install hostapd -yqq
 echo "┌─────────────────────────────────────────"
 echo "|Configuring hostapd"
 echo "└─────────────────────────────────────────"
-cp /home/pi/Captive-Portal/hostapd.conf /etc/hostapd/hostapd.conf
+cp -u /home/pi/Captive-Portal/hostapd.conf /etc/hostapd/hostapd.conf
 sed -i -- 's/#DAEMON_CONF=""/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
 
 echo "┌─────────────────────────────────────────"
