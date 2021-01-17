@@ -83,7 +83,7 @@ echo "┌───────────────────────�
 echo "|Performing test tasks"
 echo "└─────────────────────────────────────────"
 mkdir /var/www/html/files
-cp -u /home/pi/Captive-Portal/Android.png /var/www/html/files/Android.png
+cp -u /home/pi/Captive-Portal/Android.png /var/www/html/Android.png
 cp -u /home/pi/Captive-Portal/download.php /var/www/html/download.php
 
 echo "┌─────────────────────────────────────────"
