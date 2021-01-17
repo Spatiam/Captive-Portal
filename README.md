@@ -1,5 +1,22 @@
 #### Install
 
+Start with a fresh image - tested on 2020-12-02-raspios-buster-armhf
+
+Etch the image to a microSD card
+
+Add ssh or ssh.txt file to the boot directory
+
+Insert microSD card, connect ethernet, power RPi
+
+Discover the IP with any software like FING and SSH into the RPi on port 22
+
+```
+sudo raspi-config
+5
+L4
+US
+```
+
 ```
 git clone https://github.com/Spatiam/Captive-Portal.git
 ```
@@ -13,14 +30,6 @@ sudo bash /home/pi/Captive-Portal/captiveportal.sh $0
 ```
 
 RPi will reboot - IP Address may change
-
-```
-sudo raspi-config
-5
-L4
-US
-sudo systemctl restart hostapd.service
-```
 
 #### Additional
 

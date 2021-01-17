@@ -21,7 +21,7 @@ echo "└───────────────────────�
 apt-get install nginx -yqq
 cp /home/pi/Captive-Portal/default_nginx /etc/nginx/sites-enabled/default
 cp /home/pi/Captive-Portal/index.php /var/www/html/index.php
-cp /home/pi/Captive-Portal/index.html /var/www/html/index.html
+cp /home/pi/Captive-Portal/data.txt /var/www/html/data.txt
 
 echo "┌─────────────────────────────────────────"
 echo "|Installing dnsmasq"
