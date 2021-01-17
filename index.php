@@ -14,7 +14,7 @@
 <body>
     <?php
     // Array containing sample image file names
-    $images = array("Android.png");
+    $images = array("files/Android.png");
     
     // Loop through array to create image gallery
     foreach($images as $image){
