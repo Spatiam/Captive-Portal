@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>PHP DataStore</title>
+<meta charset="UTF-8">
+<title>APK Download</title>
+<style type="text/css">
+    .img-box{
+        display: inline-block;
+        text-align: center;
+        margin: 0 15px;
+    }
+</style>
 </head>
 <body>
-  <form method="post">
-    Message:<br>
-    <input type="text" name="textdata"><br>
-    <input type="submit" name="submit">
+    <?php
+    // Array containing sample image file names
+    $images = array("Android.png");
     
-  </form>
+    // Loop through array to create image gallery
+    foreach($images as $image){
+        echo '<div class="img-box">';
+            echo '<img src="images/' . $image . '" width="200" alt="' .  pathinfo($image, PATHINFO_FILENAME) .'">';
+            echo '<p><a href="download.php?file=data.txt">Download</a></p>';
+        echo '</div>';
+    }
+    ?>
 </body>
 </html>
-<?php
-              
-if(isset($_POST['textdata']))
-{
-$data=$_POST['textdata'];
-$fp = fopen('data.txt', 'a');
-fwrite($fp, $data);
-fclose($fp);
-}
-?>
