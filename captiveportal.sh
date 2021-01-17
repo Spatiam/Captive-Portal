@@ -10,10 +10,10 @@ echo "|Updating repositories"
 echo "└─────────────────────────────────────────"
 apt-get update -yqq
 
- echo "┌─────────────────────────────────────────"
- echo "|Upgrading packages"
- echo "└─────────────────────────────────────────"
- apt-get upgrade -yqq
+# echo "┌─────────────────────────────────────────"
+# echo "|Upgrading packages"
+# echo "└─────────────────────────────────────────"
+# apt-get upgrade -yqq
 
 echo "┌─────────────────────────────────────────"
 echo "|Installing and configuring nginx"
