@@ -20,7 +20,6 @@ sudo raspi-config
 L4
 US
 sudo systemctl restart hostapd.service
-sudo reboot
 ```
 
 #### Additional
