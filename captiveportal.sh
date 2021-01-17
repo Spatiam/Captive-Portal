@@ -23,6 +23,7 @@ cp -u /home/pi/Captive-Portal/default_nginx /etc/nginx/sites-enabled/default
 cp -u /home/pi/Captive-Portal/index.php /var/www/html/index.php
 cp -u /home/pi/Captive-Portal/index.html /var/www/html/index.html
 cp -u /home/pi/Captive-Portal/data.txt /var/www/html/data.txt
+cp -u /home/pi/Captive-Portal/download.php /var/www/html/download.php
 
 echo "┌─────────────────────────────────────────"
 echo "|Installing dnsmasq"
@@ -79,13 +80,6 @@ echo "┌───────────────────────�
 echo "|Installing PHP7"
 echo "└─────────────────────────────────────────"
 apt-get install php7.3-fpm php7.3-mbstring php7.3-mysql php7.3-curl php7.3-gd php7.3-curl php7.3-zip php7.3-xml -yqq > /dev/null
-
-echo "┌─────────────────────────────────────────"
-echo "|Performing test tasks"
-echo "└─────────────────────────────────────────"
-mkdir /var/www/html/files
-cp -u /home/pi/Captive-Portal/Android.png /var/www/html/Android.png
-cp -u /home/pi/Captive-Portal/download.php /var/www/html/download.php
 
 echo "┌─────────────────────────────────────────"
 echo "|Attempting reboot"

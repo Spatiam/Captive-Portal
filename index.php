@@ -12,17 +12,7 @@
 </style>
 </head>
 <body>
-    <?php
-    // Array containing sample image file names
-    $images = array("Android.png");
-    
-    // Loop through array to create image gallery
-    foreach($images as $image){
-        echo '<div class="img-box">';
-            echo '<img src="' . $image . '" width="200" alt="' .  pathinfo($image, PATHINFO_FILENAME) .'">';
-            echo '<p><a href="download.php?file=data.txt">Download</a></p>';
-        echo '</div>';
-    }
-    ?>
+<img src="Android.png"/>
+<p><a href="download.php?file=data.txt">Download</a></p>
 </body>
 </html>
