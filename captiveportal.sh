@@ -31,6 +31,7 @@ cp -u /home/pi/Captive-Portal/index.php /var/www/html/index.php
 cp -u /home/pi/Captive-Portal/index.html /var/www/html/index.html
 cp -u /home/pi/Captive-Portal/data.txt /var/www/html/data.txt
 cp -u /home/pi/Captive-Portal/download.php /var/www/html/download.php
+cp -u /home/pi/Captive-Portal/submit.php /var/www/html/submit.php
 cp -u /home/pi/Captive-Portal/Android.png /var/www/html/images/Android.png
 cp -u /home/pi/Captive-Portal/spatiam.jpg /var/www/html/images/spatiam.jpg
 cp -U /home/pi/Captive-Portal/submit.php /var/www/html/submit.php
