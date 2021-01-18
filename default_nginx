@@ -78,6 +78,11 @@ server {
                 return 302 http://hotspot.localnet/index.php;
         }
 
+# Redirect requests for spatiam.lan to open the captive portal screen
+        location spatiam.lan {
+                return 302 http://hotspot.localnet/index.php;
+        }
+
 # Redirect requests for /mobile/status.php to open the captive portal screen
         location /mobile/status.php {
                 return 302 http://hotspot.localnet/index.php;
