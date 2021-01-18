@@ -1,9 +1,3 @@
-<html>
-<body>
-<h1 style="font size:20px">This page is intended for Android users only</h1>
-</body>
-</html>
-
 <?php
 if(isset($_REQUEST["file"])){
     // Get parameters

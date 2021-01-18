@@ -1,3 +1,17 @@
+#### Required Hardware
+
+Raspebrry Pi 4 + USB-C Cable
+
+Ethernet Cable
+
+USB Wifi Dongle
+
+#### Future Hardware
+
+USB Webcam
+
+GPS Module
+
 #### Install
 
 Start with a fresh image - tested on 2020-12-02-raspios-buster-armhf
