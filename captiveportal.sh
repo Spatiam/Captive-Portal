@@ -36,6 +36,9 @@ cp -u /home/pi/Captive-Portal/Android.png /var/www/html/images/Android.png
 cp -u /home/pi/Captive-Portal/spatiam.jpg /var/www/html/images/spatiam.jpg
 cp -U /home/pi/Captive-Portal/submit.php /var/www/html/submit.php
 cp -U /home/pi/Captive-Portal/DTN.apk /var/www/html/files/DTN.apk
+cp -u /home/pi/Captive-Portal/watchpack.py /var/www/html/watchpack.py
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
 
 echo "┌─────────────────────────────────────────"
 echo "|Installing dnsmasq"
@@ -92,6 +95,62 @@ echo "┌───────────────────────�
 echo "|Installing PHP7"
 echo "└─────────────────────────────────────────"
 apt-get install php7.3-fpm php7.3-mbstring php7.3-mysql php7.3-curl php7.3-gd php7.3-curl php7.3-zip php7.3-xml -yqq > /dev/null
+
+echo "┌─────────────────────────────────────────"
+echo "|Building watchpack"
+echo "└─────────────────────────────────────────"
+sudo pip install Watchdog
+sudo pip install systemd
+apt-get install -y fswebcam
+set -o noclobber
+filename='/lib/systemd/system/watchpack.service'
+if [ -f $filename ]; then
+    rm $filename
+fi
+touch $filename
+cat >| /lib/systemd/system/watchpack.service <<"EOL"
+[Unit]
+Description=Watchdog Packaging Service
+After=multi-user.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /var/www/html/watchpack.py
+Restart=on-abort
+[Install]
+WantedBy=multi-user.target
+EOL
+sudo chmod 644 /lib/systemd/system/watchpack.service
+chmod +x /var/www/html/watchpack.py
+sudo systemctl daemon-reload
+sudo systemctl enable watchpack.service
+sudo systemctl start watchpack.service
+
+echo "┌─────────────────────────────────────────"
+echo "|Setting up GPS"
+echo "└─────────────────────────────────────────"
+apt-get install gpsd gpsd-clients python-gps
+sudo systemctl stop gpsd.socket
+sudo systemctl disable gpsd.socket
+filename='/lib/systemd/system/gpsd.socket'
+if [ -f $filename ]; then
+    rm $filename
+fi
+touch $filename
+cat >| /lib/systemd/system/gpsd.socket <<"EOL"
+[Unit]
+Description=GPS (Global Positioning System) Daemon Sockets
+[Socket]
+ListenStream=/var/run/gpsd.sock
+ListenStream=[::1]:2947
+ListenStream=0.0.0.0:2947
+SocketMode=0600
+[Install]
+WantedBy=sockets.target
+EOL
+sudo killall gpsd
+sudo gpsd /dev/ttyACM0 -F /var/run/gpsd.sock
+sudo systemctl enable gpsd.socket
+#gpsmon OR minicom -b 115200 -o -D /dev/ttyACM0
 
 echo "┌─────────────────────────────────────────"
 echo "|Attempting reboot"
