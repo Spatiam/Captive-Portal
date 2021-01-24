@@ -6,11 +6,9 @@ Ethernet Cable
 
 USB Wifi Dongle
 
-#### Future Hardware
-
 USB Webcam
 
-GPS Module
+GPS Module **Not yet implemented
 
 #### Install
 
@@ -64,6 +62,18 @@ clients3.google.com
 Those IPs needs to be NATed to the pi (Network Address Translation) 
 
 We intercept and modify the related network address headers as they route to the end-device
+
+
+
+
+
+*It will be important when packaging this as a product to change the user/pass on the RPi
+
+
+
+
+
+You can monitor the watchpack service using `sudo journalctl -f -u watchpack.service`
 
 #### Troubleshooting
 
