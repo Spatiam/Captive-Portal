@@ -47,14 +47,23 @@ RPi will reboot - IP Address may change
 
 #### Additional
 
-Below sites needs to be resolvable to public IPs for CP to work
+Below sites needs to be resolvable to public IPs for CP to work:
+
 connectivitycheck.gstatic.com
+
 www.gstatic.com
+
 www.apple.com
+
 captive.apple.com
+
 clients3.google.com
 
-Those IPs needs to be NATed to the pi so basically NAT everything from WiFi to the RPI
+
+
+Those IPs needs to be NATed to the pi (Network Address Translation) 
+
+We intercept and modify the related network address headers as they route to the end-device
 
 #### Troubleshooting
 
