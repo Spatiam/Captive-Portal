@@ -67,7 +67,7 @@ We intercept and modify the related network address headers as they route to the
 
 
 
-*It will be important when packaging this as a product to change the user/pass on the RPi
+*It will be important when packaging this as a product to change the user/pass on the RPi - this will be added to the bash script when needed but will remain as the defaults for simplicity in testing
 
 
 
