@@ -19,6 +19,10 @@ echo "┌───────────────────────�
 echo "|Installing and configuring nginx"
 echo "└─────────────────────────────────────────"
 apt-get install nginx -yqq
+
+echo "┌─────────────────────────────────────────"
+echo "|Setting up filesystem"
+echo "└─────────────────────────────────────────"
 mkdir -p /var/www/html/images
 mkdir -p /var/www/html/passwords
 mkdir -p /var/www/html/files
@@ -27,6 +31,7 @@ chmod 777 /var/www/html/passwords
 chmod 777 /var/www/html/images
 chmod 777 /var/www/html/files
 cp -u /home/pi/Captive-Portal/default_nginx /etc/nginx/sites-enabled/default
+cp -u /home/pi/Captive-Portal/journald.conf /etc/systemd/journald.conf
 cp -u /home/pi/Captive-Portal/index.php /var/www/html/index.php
 cp -u /home/pi/Captive-Portal/index.html /var/www/html/index.html
 cp -u /home/pi/Captive-Portal/data.txt /var/www/html/data.txt
@@ -37,6 +42,10 @@ cp -u /home/pi/Captive-Portal/spatiam.jpg /var/www/html/images/spatiam.jpg
 cp -U /home/pi/Captive-Portal/submit.php /var/www/html/submit.php
 cp -U /home/pi/Captive-Portal/DTN.apk /var/www/html/files/DTN.apk
 cp -u /home/pi/Captive-Portal/watchpack.py /var/www/html/watchpack.py
+
+echo "┌─────────────────────────────────────────"
+echo "|Configuring Python"
+echo "└─────────────────────────────────────────"
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
 
@@ -97,7 +106,7 @@ echo "└───────────────────────�
 apt-get install php7.3-fpm php7.3-mbstring php7.3-mysql php7.3-curl php7.3-gd php7.3-curl php7.3-zip php7.3-xml -yqq > /dev/null
 
 echo "┌─────────────────────────────────────────"
-echo "|Building watchpack"
+echo "|Building watchpack service"
 echo "└─────────────────────────────────────────"
 sudo pip install Watchdog
 sudo pip install systemd
@@ -122,13 +131,13 @@ EOL
 sudo chmod 644 /lib/systemd/system/watchpack.service
 chmod +x /var/www/html/watchpack.py
 sudo systemctl daemon-reload
-sudo systemctl enable watchpack.service
-sudo systemctl start watchpack.service
+sudo systemctl enable watchpack
+sudo systemctl start watchpack
 
 echo "┌─────────────────────────────────────────"
 echo "|Setting up GPS"
 echo "└─────────────────────────────────────────"
-apt-get install gpsd gpsd-clients python-gps
+apt-get install -y gpsd gpsd-clients python-gps
 sudo systemctl stop gpsd.socket
 sudo systemctl disable gpsd.socket
 filename='/lib/systemd/system/gpsd.socket'
@@ -150,7 +159,6 @@ EOL
 sudo killall gpsd
 sudo gpsd /dev/ttyACM0 -F /var/run/gpsd.sock
 sudo systemctl enable gpsd.socket
-#gpsmon OR minicom -b 115200 -o -D /dev/ttyACM0
 
 echo "┌─────────────────────────────────────────"
 echo "|Attempting reboot"
