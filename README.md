@@ -6,9 +6,9 @@ Ethernet Cable
 
 USB Wifi Dongle
 
-USB Webcam
+1080p USB Webcam
 
-GPS Module **Not yet implemented
+Stemedu VK172 USB GPS Dongle
 
 #### Install
 
