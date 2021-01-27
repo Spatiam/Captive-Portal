@@ -43,6 +43,29 @@ sudo bash /home/pi/Captive-Portal/captiveportal.sh $0
 
 RPi will reboot - IP Address may change
 
+#### GPS and Monitoring
+
+The watchpack service can be monitored with 
+
+```
+sudo journalctl -f -u watchpack.service --all
+```
+
+###### Sample GPS Data
+
+```
+$GPRMC,055910.00,A,3307.79227,N,09646.86076,W,0.147,,270121,,,D*66
+$GPVTG,,T,,M,0.147,N,0.273,K,D*22
+$GPGGA,055910.00,3307.79227,N,09646.86076,W,2,07,1.14,239.7,M,-25.3,M,,0000*6C
+$GPGSA,A,3,19,05,46,25,02,29,12,,,,,,1.97,1.14,1.61*0D
+$GPGSV,3,1,11,02,52,036,34,05,74,169,37,06,16,061,,09,03,042,*7A
+$GPGSV,3,2,11,12,55,213,22,13,06,152,,19,11,113,08,25,46,286,40*77
+$GPGSV,3,3,11,29,24,313,31,46,38,229,34,51,50,199,*40
+$GPGLL,3307.79227,N,09646.86076,W,055910.00,A,D*7A
+```
+
+This data contains obscured values for time(GMT), date, latitude/longitude(DMS), speed(knots), true course, variation, and checksum values. The watchpack service is designed to parse this data live, make necessary conversions for the desired output units (DMS -> DD), and, listening for user messages, package GPS data, live images, and  user messages.
+
 #### Additional
 
 Below sites needs to be resolvable to public IPs for CP to work:
