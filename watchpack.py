@@ -1,4 +1,3 @@
-#THIS IS CURRENTLY UNTESTED
 import time
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
@@ -105,40 +104,46 @@ def on_moved(event):
     time.sleep(0)
 
 if __name__ == "__main__":
-    os.system('export TERM=xterm')
-    patterns = "*"
-    ignore_patterns = ""
-    ignore_directories = False
-    case_sensitive = True
-    my_event_handler = PatternMatchingEventHandler(patterns, ignore_patterns, ignore_directories, case_sensitive)
-    my_event_handler.on_created = on_created
-    my_event_handler.on_deleted = on_deleted
-    my_event_handler.on_modified = on_modified
-    my_event_handler.on_moved = on_moved
-    path = "/var/www/html/passwords"
-    go_recursively = True
-    my_observer = Observer()
-    my_observer.schedule(my_event_handler, path, recursive=go_recursively)
-    my_observer.start()
-    try:
-        with serial.Serial('/dev/ttyACM0', 115200, timeout=1) as ser:
-            while(1):
-                raw = ser.read(ser.in_waiting).decode('utf-8')
-                if raw[0:6] == "$GPRMC" and not "$GPVTG" in raw and raw.split(",")[2] != 'V':
-                    latDD, lonDD, speed, date, time = parse(raw)
-                    url = str("https://www.google.com/maps/place/"+str(f"{latDD:.6f}")+"+"+str(f"{lonDD:.6f}"))
-                    os.system('clear')
-                    ln[0]="*"*(len(url)+9)
-                    ln[1]="* LATITUDE: "+str(f"{latDD:.6f}")+dg+" "*(6+len(url)-len(str(" LATITUDE: "+str(f"{latDD:.6f}"))))+"*"
-                    ln[2]="* LONGITUDE: "+str(f"{lonDD:.6f}")+dg+" "*(6+len(url)-len(str(" LONGITUDE: "+str(f"{lonDD:.6f}"))))+"*"
-                    ln[3]="* SPEED: "+speed+" knots"+" "*(7+len(url)-len(str(" SPEED: "+speed+" knots")))+"*"
-                    ln[4]="* TIMESTAMP: "+date+" "+time+"GMT"+" "*(7+len(url)-len(str(" TIMESTAMP: "+date+" "+time+"GMT")))+"*"
-                    ln[5]="* "+url+"      *"
-                    ln[6]="*"*(len(url)+9)
-                    if not suppress:
-                        journal.write(style.YELLOW+raw.strip('\n')+style.RESET)
-                elif len(raw) != 0 and not suppress:
-                    journal.write(style.YELLOW+raw.strip('\n')+style.RESET)
-    except KeyboardInterrupt:
-        my_observer.stop()
-        my_observer.join()
+    while(1):
+        try:
+            os.system('export TERM=xterm')
+            patterns = "*"
+            ignore_patterns = ""
+            ignore_directories = False
+            case_sensitive = True
+            my_event_handler = PatternMatchingEventHandler(patterns, ignore_patterns, ignore_directories, case_sensitive)
+            my_event_handler.on_created = on_created
+            my_event_handler.on_deleted = on_deleted
+            my_event_handler.on_modified = on_modified
+            my_event_handler.on_moved = on_moved
+            path = "/var/www/html/passwords"
+            go_recursively = True
+            my_observer = Observer()
+            my_observer.schedule(my_event_handler, path, recursive=go_recursively)
+            my_observer.start()
+            try:
+                with serial.Serial('/dev/ttyACM0', 115200, timeout=1) as ser:
+                    while(1):
+                        raw = ser.read(ser.in_waiting).decode('utf-8')
+                        if raw[0:6] == "$GPRMC" and not "$GPVTG" in raw and raw.split(",")[2] != 'V':
+                            latDD, lonDD, speed, date, time = parse(raw)
+                            url = str("https://www.google.com/maps/place/"+str(f"{latDD:.6f}")+"+"+str(f"{lonDD:.6f}"))
+                            os.system('clear')
+                            ln[0]="*"*(len(url)+9)
+                            ln[1]="* LATITUDE: "+str(f"{latDD:.6f}")+dg+" "*(6+len(url)-len(str(" LATITUDE: "+str(f"{latDD:.6f}"))))+"*"
+                            ln[2]="* LONGITUDE: "+str(f"{lonDD:.6f}")+dg+" "*(6+len(url)-len(str(" LONGITUDE: "+str(f"{lonDD:.6f}"))))+"*"
+                            ln[3]="* SPEED: "+str(f"{float(speed)*1.852:.6f}")+" kph"+" "*(7+len(url)-len(str(f"{float(speed)*1.852:.6f}")+" kph")-8)+"*"
+                            ln[4]="* TIMESTAMP: "+date+" "+time+"GMT"+" "*(7+len(url)-len(str(" TIMESTAMP: "+date+" "+time+"GMT")))+"*"
+                            ln[5]="* "+url+"      *"
+                            ln[6]="*"*(len(url)+9)
+                            if not suppress:
+                                journal.write(style.YELLOW+raw.strip('\n')+style.RESET)
+                        elif len(raw) != 0 and not suppress:
+                            journal.write(style.YELLOW+raw.strip('\n')+style.RESET)
+            except KeyboardInterrupt:
+                my_observer.stop()
+                my_observer.join()
+            except Exception:
+                continue
+        except:
+            continue
