@@ -111,6 +111,7 @@ echo "└───────────────────────�
 sudo pip install Watchdog
 sudo pip install systemd
 apt-get install -y fswebcam
+apt-get install -y zip unzip
 set -o noclobber
 filename='/lib/systemd/system/watchpack.service'
 if [ -f $filename ]; then

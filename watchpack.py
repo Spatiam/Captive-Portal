@@ -86,8 +86,10 @@ def on_created(event):
             for i in range(len(ln)):
                 messagefile.write("\n"+ln[i])
         os.system('mv /home/pi/image_capture.jpg ''\''+makepath+'/image_capture.jpg\'')
+        os.system('zip -r \''+makepath+'.zip\' \''+makepath+'\'')
         journal.write(style.GREEN+"Cleaning up..."+style.RESET)
-        os.system('rm \''+str(event.src_path)+'\'')
+        os.system('rm -r -f \''+makepath+'\'')
+        os.system('rm -r -f \''+str(event.src_path)+'\'')
         journal.write(style.GREEN+"DONE"+style.RESET)
         suppress = False
     except:
