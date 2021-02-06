@@ -1,6 +1,6 @@
 #### Required Hardware
 
-Raspebrry Pi 4 + USB-C Cable
+Raspberry Pi 4 + USB-C Cable
 
 Ethernet Cable
 
@@ -127,3 +127,31 @@ grep -hoiIs -E '([0-9]{1,3}[\.]){3}[0-9]{1,3}' * | sort -u
 grep -E '([0-9]{1,3}[\.]){3}[0-9]{1,3}' * | sort -u```
 
 ```
+
+
+<div hidden>
+```
+@startuml hlarch
+participant captivePortal as captivePortal
+captivePortal -> watchpack: name, message
+group Raspberry Pi
+participant watchpack as watchpack
+participant Camera as Camera
+watchpack -> Camera: request
+Camera --> watchpack: image_capture.jpg
+participant GPS as GPS
+watchpack -> GPS: request
+GPS --> watchpack: lat,lon,speed,ts
+participant ION as ION
+watchpack -> watchpack: image, data -> .zip
+watchpack -> ION: .zip
+end
+group bpsendfile [infinite]
+ION -> endpoint: .zip
+participant endpoint as endpoint
+endpoint --> ION: Success/Fail
+end
+@enduml
+```
+</div>
+![](hlarch.svg)
