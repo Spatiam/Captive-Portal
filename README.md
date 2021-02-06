@@ -1,6 +1,6 @@
 #### Required Hardware
 
-Raspebrry Pi 4 + USB-C Cable
+Raspberry Pi 4 + USB-C Cable
 
 Ethernet Cable
 
@@ -127,3 +127,5 @@ grep -hoiIs -E '([0-9]{1,3}[\.]){3}[0-9]{1,3}' * | sort -u
 grep -E '([0-9]{1,3}[\.]){3}[0-9]{1,3}' * | sort -u```
 
 ```
+
+![](hlarch.png)
