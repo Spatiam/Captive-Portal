@@ -96,7 +96,7 @@ We intercept and modify the related network address headers as they route to the
 
 
 
-You can monitor the watchpack service using `sudo journalctl -f -u watchpack.service`
+You can monitor the watchpack service using `sudo journalctl -f -u watchpack.service --all`
 
 #### Troubleshooting
 
