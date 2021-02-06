@@ -40,6 +40,7 @@ cp -u /home/pi/Captive-Portal/spatiam.jpg /var/www/html/images/spatiam.jpg
 cp -u /home/pi/Captive-Portal/submit.php /var/www/html/submit.php
 cp -u /home/pi/Captive-Portal/DTN.apk /var/www/html/files/DTN.apk
 cp -u /home/pi/Captive-Portal/watchpack.py /var/www/html/watchpack.py
+mv -u /home/pi/Captive-Portal/ion-open-source-4.0.1.tar.gz /home/pi/ion-open-source-4.0.1.tar.gz
 
 echo "┌─────────────────────────────────────────"
 echo "|Configuring Python"
@@ -158,6 +159,16 @@ EOL
 sudo killall gpsd
 sudo gpsd /dev/ttyACM0 -F /var/run/gpsd.sock
 sudo systemctl enable gpsd.socket
+
+echo "┌─────────────────────────────────────────"
+echo "|Building Ion"
+echo "└─────────────────────────────────────────"
+tar -xvzf /home/pi/ion-open-source-4.0.1.tar.gz
+(cd /home/pi/ion-open-source-4.0.1 && ./configure)
+(cd /home/pi/ion-open-source-4.0.1 && make)
+(cd /home/pi/ion-open-source-4.0.1 && sudo make install)
+sudo ldconfig
+rm -r -f /home/pi/ion-open-source-4.0.1.tar.gz
 
 echo "┌─────────────────────────────────────────"
 echo "|Attempting reboot"
