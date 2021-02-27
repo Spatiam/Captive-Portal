@@ -181,7 +181,7 @@ echo "${GREEN}DONE"
 echo "${YELLOW}┌─────────────────────────────────────────"
 echo "|${WHITEBLACK}Building Ion${RESET}${YELLOW}"
 echo "└─────────────────────────────────────────${RESET}"
-tar -xvzf /home/pi/ion-open-source-4.0.2.tar.gz
+tar -xvzf /home/pi/ion-open-source-4.0.2.tar.gz -C /home/pi
 (cd /home/pi/ion-open-source-4.0.2 && ./configure)
 (cd /home/pi/ion-open-source-4.0.2 && make)
 (cd /home/pi/ion-open-source-4.0.2 && sudo make install)
