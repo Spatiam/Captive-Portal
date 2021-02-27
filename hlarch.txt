@@ -13,9 +13,11 @@ participant ION as ION
 watchpack -> watchpack: image, data -> .zip
 watchpack -> ION: .zip
 end
-group bpsendfile [infinite]
-ION -> endpoint: .zip
+group ION Communication
+endpoint -> ION: bpsource <- Authentication
+ION -> endpoint: Collective .zip
 participant endpoint as endpoint
 endpoint --> ION: Success/Fail
+ION -> ION: File Cleanup
 end
 @enduml
