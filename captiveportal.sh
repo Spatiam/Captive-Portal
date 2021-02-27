@@ -44,7 +44,7 @@ cp -u /home/pi/Captive-Portal/spatiam.jpg /var/www/html/images/spatiam.jpg
 cp -u /home/pi/Captive-Portal/submit.php /var/www/html/submit.php
 cp -u /home/pi/Captive-Portal/DTN.apk /var/www/html/files/DTN.apk
 cp -u /home/pi/Captive-Portal/watchpack.py /var/www/html/watchpack.py
-mv -u /home/pi/Captive-Portal/ion-open-source-4.0.1.tar.gz /home/pi/ion-open-source-4.0.1.tar.gz
+mv -u /home/pi/Captive-Portal/ion-open-source-4.0.2.tar.gz /home/pi/ion-open-source-4.0.2.tar.gz
 echo "${GREEN}DONE"
 
 echo "${YELLOW}┌─────────────────────────────────────────"
@@ -181,16 +181,16 @@ echo "${GREEN}DONE"
 echo "${YELLOW}┌─────────────────────────────────────────"
 echo "|${WHITEBLACK}Building Ion${RESET}${YELLOW}"
 echo "└─────────────────────────────────────────${RESET}"
-tar -xvzf /home/pi/ion-open-source-4.0.1.tar.gz
-(cd /home/pi/ion-open-source-4.0.1 && ./configure)
-(cd /home/pi/ion-open-source-4.0.1 && make)
-(cd /home/pi/ion-open-source-4.0.1 && sudo make install)
+tar -xvzf /home/pi/ion-open-source-4.0.2.tar.gz
+(cd /home/pi/ion-open-source-4.0.2 && ./configure)
+(cd /home/pi/ion-open-source-4.0.2 && make)
+(cd /home/pi/ion-open-source-4.0.2 && sudo make install)
 sudo ldconfig
-rm -r -f /home/pi/ion-open-source-4.0.1.tar.gz
-mkdir /home/pi/ion-open-source-4.0.1/dtn
-mv -u /home/pi/Captive-Portal/host_mule.rc /home/pi/ion-open-source-4.0.1/dtn/host_mule.rc
+rm -r -f /home/pi/ion-open-source-4.0.2.tar.gz
+mkdir /home/pi/ion-open-source-4.0.2/dtn
+mv -u /home/pi/Captive-Portal/host_mule.rc /home/pi/ion-open-source-4.0.2/dtn/host_mule.rc
 killm
-ionstart -I /home/pi/ion-open-source-4.0.1/dtn/host_mule.rc
+ionstart -I /home/pi/ion-open-source-4.0.2/dtn/host_mule.rc
 ss -panu
 ipcs
 echo "${GREEN}DONE"
