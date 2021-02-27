@@ -34,17 +34,17 @@ chmod 777 /var/www/html
 chmod 777 /var/www/html/passwords
 chmod 777 /var/www/html/images
 chmod 777 /var/www/html/files
-cp -u /home/pi/Captive-Portal/default_nginx /etc/nginx/sites-enabled/default
-cp -u /home/pi/Captive-Portal/journald.conf /etc/systemd/journald.conf
-cp -u /home/pi/Captive-Portal/index.php /var/www/html/index.php
-cp -u /home/pi/Captive-Portal/download.php /var/www/html/download.php
-cp -u /home/pi/Captive-Portal/submit.php /var/www/html/submit.php
-cp -u /home/pi/Captive-Portal/Android.png /var/www/html/images/Android.png
-cp -u /home/pi/Captive-Portal/spatiam.jpg /var/www/html/images/spatiam.jpg
-cp -u /home/pi/Captive-Portal/submit.php /var/www/html/submit.php
-cp -u /home/pi/Captive-Portal/DTN.apk /var/www/html/files/DTN.apk
+cp -u /home/pi/Captive-Portal/config_files/default_nginx /etc/nginx/sites-enabled/default
+cp -u /home/pi/Captive-Portal/config_files/journald.conf /etc/systemd/journald.conf
+cp -u /home/pi/Captive-Portal/php/index.php /var/www/html/index.php
+cp -u /home/pi/Captive-Portal/php/download.php /var/www/html/download.php
+cp -u /home/pi/Captive-Portal/php/submit.php /var/www/html/submit.php
+cp -u /home/pi/Captive-Portal/images/Android.png /var/www/html/images/Android.png
+cp -u /home/pi/Captive-Portal/images/spatiam.jpg /var/www/html/images/spatiam.jpg
+cp -u /home/pi/Captive-Portal/php/submit.php /var/www/html/submit.php
+cp -u /home/pi/Captive-Portal/ion/DTN.apk /var/www/html/files/DTN.apk
 cp -u /home/pi/Captive-Portal/watchpack.py /var/www/html/watchpack.py
-mv -u /home/pi/Captive-Portal/ion-open-source-4.0.2.tar.gz /home/pi/ion-open-source-4.0.2.tar.gz
+mv -u /home/pi/Captive-Portal/ion/ion-open-source-4.0.2.tar.gz /home/pi/ion-open-source-4.0.2.tar.gz
 echo "${GREEN}DONE"
 
 echo "${YELLOW}┌─────────────────────────────────────────"
@@ -63,13 +63,13 @@ echo "${GREEN}DONE"
 echo "${YELLOW}┌─────────────────────────────────────────"
 echo "|${WHITEBLACK}Configuring wlan0${RESET}${YELLOW}"
 echo "└─────────────────────────────────────────${RESET}"
-cp -u /home/pi/Captive-Portal/dhcpcd.conf /etc/dhcpcd.conf
+cp -u /home/pi/Captive-Portal/config_files/dhcpcd.conf /etc/dhcpcd.conf
 echo "${GREEN}DONE"
 
 echo "${YELLOW}┌─────────────────────────────────────────"
 echo "|${WHITEBLACK}Configuring dnsmasq${RESET}${YELLOW}"
 echo "└─────────────────────────────────────────${RESET}"
-cp -u /home/pi/Captive-Portal/dnsmasq.conf /etc/dnsmasq.conf
+cp -u /home/pi/Captive-Portal/config_files/dnsmasq.conf /etc/dnsmasq.conf
 echo "${GREEN}DONE"
 
 echo "${YELLOW}┌─────────────────────────────────────────"
@@ -87,7 +87,7 @@ echo "${GREEN}DONE"
 echo "${YELLOW}┌─────────────────────────────────────────"
 echo "|${WHITEBLACK}Configuring hostapd${RESET}${YELLOW}"
 echo "└─────────────────────────────────────────${RESET}"
-cp -u /home/pi/Captive-Portal/hostapd.conf /etc/hostapd/hostapd.conf
+cp -u /home/pi/Captive-Portal/config_files/hostapd.conf /etc/hostapd/hostapd.conf
 sed -i -- 's/#DAEMON_CONF=""/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
 echo "${GREEN}DONE"
 
@@ -188,9 +188,9 @@ tar -xvzf /home/pi/ion-open-source-4.0.2.tar.gz
 sudo ldconfig
 rm -r -f /home/pi/ion-open-source-4.0.2.tar.gz
 mkdir /home/pi/ion-open-source-4.0.2/dtn
-mv -u /home/pi/Captive-Portal/host_mule.rc /home/pi/ion-open-source-4.0.2/dtn/host_mule.rc
+mv -u /home/pi/Captive-Portal/config_files/mule.rc /home/pi/ion-open-source-4.0.2/dtn/mule.rc
 killm
-ionstart -I /home/pi/ion-open-source-4.0.2/dtn/host_mule.rc
+ionstart -I /home/pi/ion-open-source-4.0.2/dtn/mule.rc
 ss -panu
 ipcs
 echo "${GREEN}DONE"

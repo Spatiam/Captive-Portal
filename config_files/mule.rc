@@ -1,0 +1,340 @@
+## begin ionadmin
+1 1 ''
+s
+
+m horizon +0
+
+#a contact +<start> +<end> <from> <to> <rate> <confidence>
+a contact +0 +3600 1 1 1000 1
+
+a contact +0 +3600 1 10 1000 1
+a contact +0 +3600 10 1 1000 1
+a contact +0 +3600 1 11 1000 1
+a contact +0 +3600 11 1 1000 1
+a contact +0 +3600 1 12 1000 1
+a contact +0 +3600 12 1 1000 1
+a contact +0 +3600 1 13 1000 1
+a contact +0 +3600 13 1 1000 1
+a contact +0 +3600 1 14 1000 1
+a contact +0 +3600 14 1 1000 1
+a contact +0 +3600 1 15 1000 1
+a contact +0 +3600 15 1 1000 1
+a contact +0 +3600 1 16 1000 1
+a contact +0 +3600 16 1 1000 1
+a contact +0 +3600 1 17 1000 1
+a contact +0 +3600 17 1 1000 1
+a contact +0 +3600 1 18 1000 1
+a contact +0 +3600 18 1 1000 1
+a contact +0 +3600 1 19 1000 1
+a contact +0 +3600 19 1 1000 1
+a contact +0 +3600 1 20 1000 1
+a contact +0 +3600 20 1 1000 1
+a contact +0 +3600 1 21 1000 1
+a contact +0 +3600 21 1 1000 1
+a contact +0 +3600 1 22 1000 1
+a contact +0 +3600 22 1 1000 1
+a contact +0 +3600 1 23 1000 1
+a contact +0 +3600 23 1 1000 1
+a contact +0 +3600 1 24 1000 1
+a contact +0 +3600 24 1 1000 1
+a contact +0 +3600 1 25 1000 1
+a contact +0 +3600 25 1 1000 1
+a contact +0 +3600 1 26 1000 1
+a contact +0 +3600 26 1 1000 1
+a contact +0 +3600 1 27 1000 1
+a contact +0 +3600 27 1 1000 1
+a contact +0 +3600 1 28 1000 1
+a contact +0 +3600 28 1 1000 1
+a contact +0 +3600 1 29 1000 1
+a contact +0 +3600 29 1 1000 1
+a contact +0 +3600 1 30 1000 1
+a contact +0 +3600 30 1 1000 1
+a contact +0 +3600 1 31 1000 1
+a contact +0 +3600 31 1 1000 1
+a contact +0 +3600 1 32 1000 1
+a contact +0 +3600 32 1 1000 1
+a contact +0 +3600 1 33 1000 1
+a contact +0 +3600 33 1 1000 1
+a contact +0 +3600 1 34 1000 1
+a contact +0 +3600 34 1 1000 1
+a contact +0 +3600 1 35 1000 1
+a contact +0 +3600 35 1 1000 1
+a contact +0 +3600 1 36 1000 1
+a contact +0 +3600 36 1 1000 1
+a contact +0 +3600 1 37 1000 1
+a contact +0 +3600 37 1 1000 1
+a contact +0 +3600 1 38 1000 1
+a contact +0 +3600 38 1 1000 1
+a contact +0 +3600 1 39 1000 1
+a contact +0 +3600 39 1 1000 1
+a contact +0 +3600 1 40 1000 1
+a contact +0 +3600 40 1 1000 1
+a contact +0 +3600 1 41 1000 1
+a contact +0 +3600 41 1 1000 1
+a contact +0 +3600 1 42 1000 1
+a contact +0 +3600 42 1 1000 1
+a contact +0 +3600 1 43 1000 1
+a contact +0 +3600 43 1 1000 1
+a contact +0 +3600 1 44 1000 1
+a contact +0 +3600 44 1 1000 1
+a contact +0 +3600 1 45 1000 1
+a contact +0 +3600 45 1 1000 1
+a contact +0 +3600 1 46 1000 1
+a contact +0 +3600 46 1 1000 1
+a contact +0 +3600 1 47 1000 1
+a contact +0 +3600 47 1 1000 1
+a contact +0 +3600 1 48 1000 1
+a contact +0 +3600 48 1 1000 1
+a contact +0 +3600 1 49 1000 1
+a contact +0 +3600 49 1 1000 1
+a contact +0 +3600 1 50 1000 1
+a contact +0 +3600 50 1 1000 1
+
+#a range +<start> +<end> <from> <to> <distance>
+a range +0 +3600 1 1 1
+
+a range +0 +3600 1 10 1
+a range +0 +3600 10 1 1
+a range +0 +3600 1 11 1
+a range +0 +3600 11 1 1
+a range +0 +3600 1 12 1
+a range +0 +3600 12 1 1
+a range +0 +3600 1 13 1
+a range +0 +3600 13 1 1
+a range +0 +3600 1 14 1
+a range +0 +3600 14 1 1
+a range +0 +3600 1 15 1
+a range +0 +3600 15 1 1
+a range +0 +3600 1 16 1
+a range +0 +3600 16 1 1
+a range +0 +3600 1 17 1
+a range +0 +3600 17 1 1
+a range +0 +3600 1 18 1
+a range +0 +3600 18 1 1
+a range +0 +3600 1 19 1
+a range +0 +3600 19 1 1
+a range +0 +3600 1 20 1
+a range +0 +3600 20 1 1
+a range +0 +3600 1 21 1
+a range +0 +3600 21 1 1
+a range +0 +3600 1 22 1
+a range +0 +3600 22 1 1
+a range +0 +3600 1 23 1
+a range +0 +3600 23 1 1
+a range +0 +3600 1 24 1
+a range +0 +3600 24 1 1
+a range +0 +3600 1 25 1
+a range +0 +3600 25 1 1
+a range +0 +3600 1 26 1
+a range +0 +3600 26 1 1
+a range +0 +3600 1 27 1
+a range +0 +3600 27 1 1
+a range +0 +3600 1 28 1
+a range +0 +3600 28 1 1
+a range +0 +3600 1 29 1
+a range +0 +3600 29 1 1
+a range +0 +3600 1 30 1
+a range +0 +3600 30 1 1
+a range +0 +3600 1 31 1
+a range +0 +3600 31 1 1
+a range +0 +3600 1 32 1
+a range +0 +3600 32 1 1
+a range +0 +3600 1 33 1
+a range +0 +3600 33 1 1
+a range +0 +3600 1 34 1
+a range +0 +3600 34 1 1
+a range +0 +3600 1 35 1
+a range +0 +3600 35 1 1
+a range +0 +3600 1 36 1
+a range +0 +3600 36 1 1
+a range +0 +3600 1 37 1
+a range +0 +3600 37 1 1
+a range +0 +3600 1 38 1
+a range +0 +3600 38 1 1
+a range +0 +3600 1 39 1
+a range +0 +3600 39 1 1
+a range +0 +3600 1 40 1
+a range +0 +3600 40 1 1
+a range +0 +3600 1 41 1
+a range +0 +3600 41 1 1
+a range +0 +3600 1 42 1
+a range +0 +3600 42 1 1
+a range +0 +3600 1 43 1
+a range +0 +3600 43 1 1
+a range +0 +3600 1 44 1
+a range +0 +3600 44 1 1
+a range +0 +3600 1 45 1
+a range +0 +3600 45 1 1
+a range +0 +3600 1 46 1
+a range +0 +3600 46 1 1
+a range +0 +3600 1 47 1
+a range +0 +3600 47 1 1
+a range +0 +3600 1 48 1
+a range +0 +3600 48 1 1
+a range +0 +3600 1 49 1
+a range +0 +3600 49 1 1
+a range +0 +3600 1 50 1
+a range +0 +3600 50 1 1
+
+m production 1000000
+m consumption 1000000
+## end ionadmin
+
+## begin ionsecadmin
+1
+## end ionsecadmin
+
+## begin ltpadmin
+1 32
+
+a span 1 32 32 1400 10000 1 'udplso 192.168.24.1:4556' 300
+
+a span 10 32 32 1400 10000 1 'udplso 192.168.24.10:4556' 300
+a span 11 32 32 1400 10000 1 'udplso 192.168.24.11:4556' 300
+a span 12 32 32 1400 10000 1 'udplso 192.168.24.12:4556' 300
+a span 13 32 32 1400 10000 1 'udplso 192.168.24.13:4556' 300
+a span 14 32 32 1400 10000 1 'udplso 192.168.24.14:4556' 300
+a span 15 32 32 1400 10000 1 'udplso 192.168.24.15:4556' 300
+a span 16 32 32 1400 10000 1 'udplso 192.168.24.16:4556' 300
+a span 17 32 32 1400 10000 1 'udplso 192.168.24.17:4556' 300
+a span 18 32 32 1400 10000 1 'udplso 192.168.24.18:4556' 300
+a span 19 32 32 1400 10000 1 'udplso 192.168.24.19:4556' 300
+a span 20 32 32 1400 10000 1 'udplso 192.168.24.20:4556' 300
+a span 21 32 32 1400 10000 1 'udplso 192.168.24.21:4556' 300
+a span 22 32 32 1400 10000 1 'udplso 192.168.24.22:4556' 300
+a span 23 32 32 1400 10000 1 'udplso 192.168.24.23:4556' 300
+a span 24 32 32 1400 10000 1 'udplso 192.168.24.24:4556' 300
+a span 25 32 32 1400 10000 1 'udplso 192.168.24.25:4556' 300
+a span 26 32 32 1400 10000 1 'udplso 192.168.24.26:4556' 300
+a span 27 32 32 1400 10000 1 'udplso 192.168.24.27:4556' 300
+a span 28 32 32 1400 10000 1 'udplso 192.168.24.28:4556' 300
+a span 29 32 32 1400 10000 1 'udplso 192.168.24.29:4556' 300
+a span 30 32 32 1400 10000 1 'udplso 192.168.24.30:4556' 300
+a span 31 32 32 1400 10000 1 'udplso 192.168.24.31:4556' 300
+a span 32 32 32 1400 10000 1 'udplso 192.168.24.32:4556' 300
+a span 33 32 32 1400 10000 1 'udplso 192.168.24.33:4556' 300
+a span 34 32 32 1400 10000 1 'udplso 192.168.24.34:4556' 300
+a span 35 32 32 1400 10000 1 'udplso 192.168.24.35:4556' 300
+a span 36 32 32 1400 10000 1 'udplso 192.168.24.36:4556' 300
+a span 37 32 32 1400 10000 1 'udplso 192.168.24.37:4556' 300
+a span 38 32 32 1400 10000 1 'udplso 192.168.24.38:4556' 300
+a span 39 32 32 1400 10000 1 'udplso 192.168.24.39:4556' 300
+a span 40 32 32 1400 10000 1 'udplso 192.168.24.40:4556' 300
+a span 41 32 32 1400 10000 1 'udplso 192.168.24.41:4556' 300
+a span 42 32 32 1400 10000 1 'udplso 192.168.24.42:4556' 300
+a span 43 32 32 1400 10000 1 'udplso 192.168.24.43:4556' 300
+a span 44 32 32 1400 10000 1 'udplso 192.168.24.44:4556' 300
+a span 45 32 32 1400 10000 1 'udplso 192.168.24.45:4556' 300
+a span 46 32 32 1400 10000 1 'udplso 192.168.24.46:4556' 300
+a span 47 32 32 1400 10000 1 'udplso 192.168.24.47:4556' 300
+a span 48 32 32 1400 10000 1 'udplso 192.168.24.48:4556' 300
+a span 49 32 32 1400 10000 1 'udplso 192.168.24.49:4556' 300
+a span 50 32 32 1400 10000 1 'udplso 192.168.24.50:4556' 300
+
+# Or 0.0.0.0
+s 'udplsi 192.168.24.1:4556'
+## end ltpadmin
+
+## begin bpadmin
+1
+a scheme ipn 'ipnfw' 'ipnadminep'
+a endpoint ipn:1.0 q
+a endpoint ipn:1.1 q
+a endpoint ipn:1.2 q
+
+a protocol ltp 1400 100
+a induct ltp 1 ltpcli
+
+a outduct ltp 1 ltpclo
+
+a outduct ltp 10 ltpclo
+a outduct ltp 11 ltpclo
+a outduct ltp 12 ltpclo
+a outduct ltp 13 ltpclo
+a outduct ltp 14 ltpclo
+a outduct ltp 15 ltpclo
+a outduct ltp 16 ltpclo
+a outduct ltp 17 ltpclo
+a outduct ltp 18 ltpclo
+a outduct ltp 19 ltpclo
+a outduct ltp 20 ltpclo
+a outduct ltp 21 ltpclo
+a outduct ltp 22 ltpclo
+a outduct ltp 23 ltpclo
+a outduct ltp 24 ltpclo
+a outduct ltp 25 ltpclo
+a outduct ltp 26 ltpclo
+a outduct ltp 27 ltpclo
+a outduct ltp 28 ltpclo
+a outduct ltp 29 ltpclo
+a outduct ltp 30 ltpclo
+a outduct ltp 31 ltpclo
+a outduct ltp 32 ltpclo
+a outduct ltp 33 ltpclo
+a outduct ltp 34 ltpclo
+a outduct ltp 35 ltpclo
+a outduct ltp 36 ltpclo
+a outduct ltp 37 ltpclo
+a outduct ltp 38 ltpclo
+a outduct ltp 39 ltpclo
+a outduct ltp 40 ltpclo
+a outduct ltp 41 ltpclo
+a outduct ltp 42 ltpclo
+a outduct ltp 43 ltpclo
+a outduct ltp 44 ltpclo
+a outduct ltp 45 ltpclo
+a outduct ltp 46 ltpclo
+a outduct ltp 47 ltpclo
+a outduct ltp 48 ltpclo
+a outduct ltp 49 ltpclo
+a outduct ltp 50 ltpclo
+
+s
+## end bpadmin
+
+## begin ipnadmin
+a plan 1 ltp/1
+
+a plan 10 ltp/10
+a plan 11 ltp/11
+a plan 12 ltp/12
+a plan 13 ltp/13
+a plan 14 ltp/14
+a plan 15 ltp/15
+a plan 16 ltp/16
+a plan 17 ltp/17
+a plan 18 ltp/18
+a plan 19 ltp/19
+a plan 20 ltp/20
+a plan 21 ltp/21
+a plan 22 ltp/22
+a plan 23 ltp/23
+a plan 24 ltp/24
+a plan 25 ltp/25
+a plan 26 ltp/26
+a plan 27 ltp/27
+a plan 28 ltp/28
+a plan 29 ltp/29
+a plan 30 ltp/30
+a plan 31 ltp/31
+a plan 32 ltp/32
+a plan 33 ltp/33
+a plan 34 ltp/34
+a plan 35 ltp/35
+a plan 36 ltp/36
+a plan 37 ltp/37
+a plan 38 ltp/38
+a plan 39 ltp/39
+a plan 40 ltp/40
+a plan 41 ltp/41
+a plan 42 ltp/42
+a plan 43 ltp/43
+a plan 44 ltp/44
+a plan 45 ltp/45
+a plan 46 ltp/46
+a plan 47 ltp/47
+a plan 48 ltp/48
+a plan 49 ltp/49
+a plan 50 ltp/50
+
+## end ipnadmin
