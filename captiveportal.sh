@@ -1,11 +1,11 @@
 #!/bin/bash
 
-RED='\033[31m'
-GREEN='\033[32m'
-YELLOW='\033[33m'
-CYAN='\033[36m'
-RESET='\033[0m'
-WHITEBLACK='\033[0;30;47m'
+RED='\e[31m'
+GREEN='\e[32m'
+YELLOW='\e[33m'
+CYAN='\e[36m'
+RESET='\e[0m'
+WHITEBLACK='\e[0;30;47m'
 
 if [ "$EUID" -ne 0 ]
 	then echo "${RESET}${RED}Must be root, run sudo -i before running this script.${RESET}"
