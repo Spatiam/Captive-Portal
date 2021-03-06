@@ -6,19 +6,19 @@ if [ "$EUID" -ne 0 ]
 fi
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mUpdating repositories\e[39m\e[33m"
+echo -e "|\e[39mUpdating repositories\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 apt-get update -yqq
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mInstalling and configuring nginx\e[39m\e[33m"
+echo -e "|\e[39mInstalling and configuring nginx\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 apt-get install nginx -yqq
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mSetting up filesystem\e[39m\e[33m"
+echo -e "|\e[39mSetting up filesystem\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 mkdir -p /var/www/html/images
 mkdir -p /var/www/html/passwords
@@ -41,57 +41,57 @@ mv -u /home/pi/Captive-Portal/ion/ion-open-source-4.0.2.tar.gz /home/pi/ion-open
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mConfiguring Python\e[39m\e[33m"
+echo -e "|\e[39mConfiguring Python\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mInstalling dnsmasq\e[39m\e[33m"
+echo -e "|\e[39mInstalling dnsmasq\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 apt-get install dnsmasq -yqq
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mConfiguring wlan0\e[39m\e[33m"
+echo -e "|\e[39mConfiguring wlan0\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 cp -u /home/pi/Captive-Portal/config_files/dhcpcd.conf /etc/dhcpcd.conf
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mConfiguring dnsmasq\e[39m\e[33m"
+echo -e "|\e[39mConfiguring dnsmasq\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 cp -u /home/pi/Captive-Portal/config_files/dnsmasq.conf /etc/dnsmasq.conf
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mConfiguring dnsmasq to start at boot\e[39m\e[33m"
+echo -e "|\e[39mConfiguring dnsmasq to start at boot\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 update-rc.d dnsmasq defaults
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mInstalling hostapd\e[39m\e[33m"
+echo -e "|\e[39mInstalling hostapd\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 apt-get install hostapd -yqq
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mConfiguring hostapd\e[39m\e[33m"
+echo -e "|\e[39mConfiguring hostapd\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 cp -u /home/pi/Captive-Portal/config_files/hostapd.conf /etc/hostapd/hostapd.conf
 sed -i -- 's/#DAEMON_CONF=""/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mSetting country code\e[39m\e[33m"
+echo -e "|\e[39mSetting country code\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 iw reg set US
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mConfiguring iptables\e[39m\e[33m"
+echo -e "|\e[39mConfiguring iptables\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 iptables -t nat -A PREROUTING -s 192.168.24.0/24 -p tcp --dport 80 -j DNAT --to-destination 192.168.24.1:80
 iptables -t nat -A POSTROUTING -j MASQUERADE
@@ -101,20 +101,20 @@ apt-get -y install iptables-persistent
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mConfiguring hostapd to start at boot\e[39m\e[33m"
+echo -e "|\e[39mConfiguring hostapd to start at boot\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 systemctl unmask hostapd.service
 systemctl enable hostapd.service
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mInstalling PHP7\e[39m\e[33m"
+echo -e "|\e[39mInstalling PHP7\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 apt-get install php7.3-fpm php7.3-mbstring php7.3-mysql php7.3-curl php7.3-gd php7.3-curl php7.3-zip php7.3-xml -yqq > /dev/null
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mBuilding watchpack service\e[39m\e[33m"
+echo -e "|\e[39mBuilding watchpack service\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 sudo pip install Watchdog
 sudo pip install systemd
@@ -145,7 +145,7 @@ sudo systemctl start watchpack
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mSetting up GPS\e[39m\e[33m"
+echo -e "|\e[39mSetting up GPS\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 apt-get install -y gpsd gpsd-clients python-gps
 sudo systemctl stop gpsd.socket
@@ -172,7 +172,7 @@ sudo systemctl enable gpsd.socket
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mBuilding Ion\e[39m\e[33m"
+echo -e "|\e[39mBuilding Ion\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 tar -xvzf /home/pi/ion-open-source-4.0.2.tar.gz -C /home/pi
 (cd /home/pi/ion-open-source-4.0.2 && ./configure)
@@ -189,7 +189,7 @@ ipcs
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
-echo -e "|\e[0;30;47mReoot required\e[39m\e[33m"
+echo -e "|\e[39mReoot required\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 read -n 1 -s -r -p "\e[36mPress any key to reboot\e[39m"
 reboot
