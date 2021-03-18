@@ -50,5 +50,5 @@ echo -e "\e[32mDONE"
 echo -e "\e[33m┌─────────────────────────────────────────"
 echo -e "|\e[39mReoot required\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
-read -n 1 -s -r -p "\e[36mPress any key to reboot\e[39m"
+read -n 1 -s -r -p "Press any key to reboot"
 reboot
