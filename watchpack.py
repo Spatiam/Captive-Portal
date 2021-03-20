@@ -5,6 +5,10 @@ import os
 from systemd import journal
 import datetime
 import serial
+import threading
+import subprocess
+import zipfile
+import glob
 
 dg = u'\N{DEGREE SIGN}'
 raw=""
@@ -54,6 +58,62 @@ def decode(coord):
   min = head[-2:]
   return deg + " deg " + min + "." + tail + " min"
 
+def ion_message_listener():
+    global suppress
+    lineCounter=0
+    time.sleep(60)
+    os.system('killm')
+    os.system('ionstart -I /home/pi/ion-open-source-4.0.2/dtn/mule.rc')
+    process = subprocess.Popen(['bpsink','ipn:1.1'], stdout=subprocess.PIPE)
+    journal.write("ION_MESSAGE_LISTENER STARTED")
+    while True:
+        output = process.stdout.readline()
+        if output == '' and process.poll() is not None:
+            break
+        if output:
+            suppress=True
+            if lineCounter == 2:
+                lineCounter = 0
+                true_output = output.decode('utf-8').strip()[1:-1]
+                journal.write(style.GREEN+"ION MESSAGE:"+true_output+style.RESET)
+                if "download:" in true_output:
+                  try:
+                    return_ipn = true_output.split(":")[-1]
+                    homepath='/home/pi/*.zip'
+                    filenames = glob.glob(homepath)
+                    for file in filenames:
+                      if file == "/home/pi/download.zip":
+                        filenames.remove(file)
+                    journal.write(filenames)
+                    with zipfile.ZipFile('/home/pi/download.zip', 'w') as zipMe:
+                      for file in filenames:
+                        zipMe.write(file, compress_type=zipfile.ZIP_DEFLATED)
+                    for file in filenames:
+                      if file != "/home/pi/download.zip":
+                        os.system('rm -r -f '+file)
+                    for i in range(10):
+                        journal.write(style.YELLOW+"bpsendfile to ipn:"+return_ipn+".1 in "+str(10-i)+"s"+style.RESET)
+                        time.sleep(1)
+                    send_command = "bpsendfile ipn:1.1 ipn:"+return_ipn+".1 /home/pi/download.zip"
+                    journal.write(style.GREEN+send_command+style.RESET)
+                    os.system(send_command)
+                  except:
+                    journal.write(style.RED+"FAILED TO PACKAGE ZIP"+style.RESET)
+            if lineCounter == 1:
+                try:
+                    number = int(output.decode('utf-8').strip().split(" ")[-1].replace('.',''))
+                    if number < 80:
+                        lineCounter = 2
+                    else:
+                         journal.write(style.GREEN+"RECEIVED PAYLOAD > 79"+style.RESET)
+                except:
+                    lineCounter = 0
+            if output.decode('utf-8').strip() == "ION event: Payload delivered.":
+                lineCounter = 1
+            suppress=False
+    rc = process.poll()
+    return rc
+
 def on_created(event):
     global suppress
     global ln
@@ -86,7 +146,10 @@ def on_created(event):
             for i in range(len(ln)):
                 messagefile.write("\n"+ln[i])
         os.system('mv /home/pi/image_capture.jpg ''\''+makepath+'/image_capture.jpg\'')
-        os.system('zip -r \''+makepath+'.zip\' \''+makepath+'\'')
+        user_zip = [makepath]
+        with zipfile.ZipFile(makepath+'.zip', 'w') as zipMe:        
+          for file in user_zip:
+            zipMe.write(file, compress_type=zipfile.ZIP_DEFLATED)
         journal.write(style.GREEN+"Cleaning up..."+style.RESET)
         os.system('rm -r -f \''+makepath+'\'')
         os.system('rm -r -f \''+str(event.src_path)+'\'')
@@ -96,16 +159,9 @@ def on_created(event):
         suppress = False
         journal.write(style.RED+"File write error"+style.RESET)
 
-def on_deleted(event):
-    time.sleep(0)
-
-def on_modified(event):
-    time.sleep(0)
-
-def on_moved(event):
-    time.sleep(0)
-
 if __name__ == "__main__":
+    ion_message_listener_thread = threading.Thread(target=ion_message_listener)
+    ion_message_listener_thread.start()
     while(1):
         try:
             os.system('export TERM=xterm')
@@ -113,12 +169,9 @@ if __name__ == "__main__":
             ignore_patterns = ""
             ignore_directories = False
             case_sensitive = True
+            path = "/var/www/html/passwords"
             my_event_handler = PatternMatchingEventHandler(patterns, ignore_patterns, ignore_directories, case_sensitive)
             my_event_handler.on_created = on_created
-            my_event_handler.on_deleted = on_deleted
-            my_event_handler.on_modified = on_modified
-            my_event_handler.on_moved = on_moved
-            path = "/var/www/html/passwords"
             go_recursively = True
             my_observer = Observer()
             my_observer.schedule(my_event_handler, path, recursive=go_recursively)
