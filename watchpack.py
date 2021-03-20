@@ -61,11 +61,15 @@ def decode(coord):
 def ion_message_listener():
     global suppress
     lineCounter=0
-    time.sleep(60)
+    suppress = True
+    for i in range(60):
+        journal.write(style.YELLOW+"Starting watchpack service in "+str(60-i)+"s"+style.RESET)
+        time.sleep(1)
     os.system('killm')
     os.system('ionstart -I /home/pi/ion-open-source-4.0.2/dtn/mule.rc')
     process = subprocess.Popen(['bpsink','ipn:1.1'], stdout=subprocess.PIPE)
     journal.write("ION_MESSAGE_LISTENER STARTED")
+    suppress = False
     while True:
         output = process.stdout.readline()
         if output == '' and process.poll() is not None:
