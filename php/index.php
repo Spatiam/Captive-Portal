@@ -1,10 +1,14 @@
 <html>
 <style>
+
 html{
     font-family: 'Helvetica', 'Arial', sans-serif;
-    width:100%;
+    width: 100%;
     height:100%;
+    margin-right:auto;
+    margin-left: auto;
 }
+
 body{
     width:100%;
     height:100%;
@@ -45,6 +49,7 @@ body{
     border-radius: 2rem;
     padding: 2rem;
     margin: 3rem;
+    font-family: inherit !important;
 }
 
 .messaging_header {
@@ -79,6 +84,7 @@ input[type=text] {
     border: none;
     border-radius: 1rem;
     -webkit-appearance: none;
+    font-family: inherit;
 }
 
 input[type=submit] {
@@ -148,6 +154,38 @@ p {
     font-weight: 0.1rem !important;
     text-align: center;
 }
+
+/* For laptops and tablets */
+@media only screen and (min-width: 1000px) {
+    html{
+        max-width: 50%;
+    }
+
+    h1 {
+        padding-top: 2.5rem;
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1.5rem;
+    }
+    input[type=text] {
+        font-size: 1.5em;
+    }
+
+    .messaging_message {
+        font-size: 1.5rem;
+    }
+
+    input[type=submit] {
+        font-size: 1.5rem;
+    }
+
+    .download_app_button {
+        font-size: 1.5rem;
+    }
+}
+
 
 </style>
 <body>
