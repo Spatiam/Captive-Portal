@@ -34,6 +34,11 @@ cp -u /home/pi/Captive-Portal/php/download.php /var/www/html/download.php
 cp -u /home/pi/Captive-Portal/php/submit.php /var/www/html/submit.php
 cp -u /home/pi/Captive-Portal/images/Android.png /var/www/html/images/Android.png
 cp -u /home/pi/Captive-Portal/images/spatiam.jpg /var/www/html/images/spatiam.jpg
+cp -u /home/pi/Captive-Portal/images/android_icon.png /var/www/html/images/android_icon.png
+cp -u /home/pi/Captive-Portal/images/app_design.png /var/www/html/images/app_design.png
+cp -u /home/pi/Captive-Portal/images/messaging_icon.png /var/www/html/images/messaging_icon.png
+cp -u /home/pi/Captive-Portal/images/spatiam_logo.png /var/www/html/images/spatiam_logo.png
+cp -u /home/pi/Captive-Portal/images/warning_icon.png /var/www/html/images/warning_icon.png
 cp -u /home/pi/Captive-Portal/php/submit.php /var/www/html/submit.php
 cp -u /home/pi/Captive-Portal/ion/DTN.apk /var/www/html/files/DTN.apk
 cp -u /home/pi/Captive-Portal/watchpack.py /var/www/html/watchpack.py
