@@ -230,7 +230,7 @@ Restart=on-abort
 WantedBy=multi-user.target
 EOL
 sudo chmod 644 /lib/systemd/system/ionlistener.service
-chmod +x /var/www/html/ionslitener.py
+chmod +x /var/www/html/ionlistener.py
 sudo systemctl daemon-reload
 sudo systemctl enable ionlistener
 sudo systemctl start ionlistener

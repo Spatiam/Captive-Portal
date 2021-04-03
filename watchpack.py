@@ -130,7 +130,6 @@ if __name__ == "__main__":
                         if raw[0:6] == "$GPRMC" and not "$GPVTG" in raw and raw.split(",")[2] != 'V':
                             latDD, lonDD, speed, date, time = parse(raw)
                             url = str("https://www.google.com/maps/place/"+str(f"{latDD:.6f}")+"+"+str(f"{lonDD:.6f}"))
-                            os.system('clear')
                             ln[0]="*"*(len(url)+9)
                             ln[1]="* LATITUDE: "+str(f"{latDD:.6f}")+dg+" "*(6+len(url)-len(str(" LATITUDE: "+str(f"{latDD:.6f}"))))+"*"
                             ln[2]="* LONGITUDE: "+str(f"{lonDD:.6f}")+dg+" "*(6+len(url)-len(str(" LONGITUDE: "+str(f"{lonDD:.6f}"))))+"*"
@@ -141,7 +140,7 @@ if __name__ == "__main__":
                             if not suppress:
                                 log.info(style.YELLOW+raw.strip('\n')+style.RESET)
                         elif len(raw) != 0 and not suppress:
-                            if logCounter > 20:
+                            if logCounter > 100:
                                 log.info(style.YELLOW+raw.strip('\n')+style.RESET)
                                 logCounter=0
                             else:
