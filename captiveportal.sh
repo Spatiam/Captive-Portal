@@ -42,6 +42,7 @@ cp -u /home/pi/Captive-Portal/images/warning_icon.png /var/www/html/images/warni
 cp -u /home/pi/Captive-Portal/php/submit.php /var/www/html/submit.php
 cp -u /home/pi/Captive-Portal/ion/DTN.apk /var/www/html/files/DTN.apk
 cp -u /home/pi/Captive-Portal/watchpack.py /var/www/html/watchpack.py
+cp -u /home/pi/Captive-Portal/ionlistener.py /var/www/html/ionlistener.py
 mv -u /home/pi/Captive-Portal/ion/ion-open-source-4.0.2.tar.gz /home/pi/ion-open-source-4.0.2.tar.gz
 echo -e "\e[32mDONE"
 
@@ -191,6 +192,48 @@ killm
 ionstart -I /home/pi/ion-open-source-4.0.2/dtn/mule.rc
 ss -panu
 ipcs
+echo -e "\e[32mDONE"
+
+echo -e "\e[33m┌─────────────────────────────────────────"
+echo -e "|\e[39mSetting up Logging\e[39m\e[33m"
+echo -e "└─────────────────────────────────────────\e[39m"
+sudo apt install libsystemd-dev -y
+sudo pip install systemd-python
+echo -e "\e[32mDONE"
+
+echo -e "\e[33m┌─────────────────────────────────────────"
+echo -e "|\e[39mSetting up MQTT Broker\e[39m\e[33m"
+echo -e "└─────────────────────────────────────────\e[39m"
+sudo pip install paho-mqtt
+sudo apt install -y mosquitto mosquitto-clients
+sudo systemctl enable mosquitto.service
+echo -e "\e[32mDONE"
+
+echo -e "\e[33m┌─────────────────────────────────────────"
+echo -e "|\e[39mBuilding ionlistener service\e[39m\e[33m"
+echo -e "└─────────────────────────────────────────\e[39m"
+set -o noclobber
+filename='/lib/systemd/system/ionlistener.service'
+if [ -f $filename ]; then
+    rm $filename
+fi
+touch $filename
+cat >| /lib/systemd/system/ionlistener.service <<"EOL"
+[Unit]
+Description=Ion Messaging Service
+After=multi-user.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /var/www/html/ionlistener.py
+Restart=on-abort
+[Install]
+WantedBy=multi-user.target
+EOL
+sudo chmod 644 /lib/systemd/system/ionlistener.service
+chmod +x /var/www/html/ionslitener.py
+sudo systemctl daemon-reload
+sudo systemctl enable ionlistener
+sudo systemctl start ionlistener
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"

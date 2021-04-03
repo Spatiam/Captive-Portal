@@ -2,7 +2,8 @@ import time
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 import os
-from systemd import journal
+import logging
+from systemd.journal import JournalHandler
 import datetime
 import serial
 import threading
@@ -14,6 +15,9 @@ dg = u'\N{DEGREE SIGN}'
 raw=""
 ln=["","","","","","",""]
 suppress = False
+log = logging.getLogger('watchpack.service')
+log.addHandler(JournalHandler())
+log.setLevel(logging.INFO)
 
 class style():
     BLACK = '\033[30m'
@@ -58,93 +62,33 @@ def decode(coord):
   min = head[-2:]
   return deg + " deg " + min + "." + tail + " min"
 
-def ion_message_listener():
-    global suppress
-    lineCounter=0
-    suppress = True
-    for i in range(60):
-        journal.write(style.YELLOW+"Starting watchpack service in "+str(60-i)+"s"+style.RESET)
-        time.sleep(1)
-    os.system('killm')
-    os.system('ionstart -I /home/pi/ion-open-source-4.0.2/dtn/mule.rc')
-    process = subprocess.Popen(['bpsink','ipn:1.1'], stdout=subprocess.PIPE)
-    journal.write("ION_MESSAGE_LISTENER STARTED")
-    suppress = False
-    while True:
-        output = process.stdout.readline()
-        if output == '' and process.poll() is not None:
-            break
-        if output:
-            suppress=True
-            if lineCounter == 2:
-                lineCounter = 0
-                true_output = output.decode('utf-8').strip()[1:-1]
-                journal.write(style.GREEN+"ION MESSAGE:"+true_output+style.RESET)
-                if "download:" in true_output:
-                  try:
-                    return_ipn = true_output.split(":")[-1]
-                    homepath='/home/pi/*.zip'
-                    filenames = glob.glob(homepath)
-                    for file in filenames:
-                      if file == "/home/pi/download.zip":
-                        filenames.remove(file)
-                    journal.write(filenames)
-                    with zipfile.ZipFile('/home/pi/download.zip', 'w') as zipMe:
-                      for file in filenames:
-                        zipMe.write(file, compress_type=zipfile.ZIP_DEFLATED)
-                    for file in filenames:
-                      if file != "/home/pi/download.zip":
-                        os.system('rm -r -f '+file)
-                    for i in range(10):
-                        journal.write(style.YELLOW+"bpsendfile to ipn:"+return_ipn+".1 in "+str(10-i)+"s"+style.RESET)
-                        time.sleep(1)
-                    send_command = "bpsendfile ipn:1.1 ipn:"+return_ipn+".1 /home/pi/download.zip"
-                    journal.write(style.GREEN+send_command+style.RESET)
-                    os.system(send_command)
-                  except:
-                    journal.write(style.RED+"FAILED TO PACKAGE ZIP"+style.RESET)
-            if lineCounter == 1:
-                try:
-                    number = int(output.decode('utf-8').strip().split(" ")[-1].replace('.',''))
-                    if number < 80:
-                        lineCounter = 2
-                    else:
-                         journal.write(style.GREEN+"RECEIVED PAYLOAD > 79"+style.RESET)
-                except:
-                    lineCounter = 0
-            if output.decode('utf-8').strip() == "ION event: Payload delivered.":
-                lineCounter = 1
-            suppress=False
-    rc = process.poll()
-    return rc
-
 def on_created(event):
     global suppress
     global ln
     suppress = True
-    journal.write(style.GREEN+f"{event.src_path} - New Message"+style.RESET)
+    log.info(style.GREEN+f"{event.src_path} - New Message"+style.RESET)
     try:
-        journal.write(style.GREEN+"Capturing image..."+style.RESET)
+        log.info(style.GREEN+"Capturing image..."+style.RESET)
         os.system('fswebcam -r 1920x1080 /home/pi/image_capture.jpg')
     except:
-        journal.write(style.RED+"Camera Error (404) - Make sure camera is connected and turned on"+style.RESET)
+        log.info(style.RED+"Camera Error (404) - Make sure camera is connected and turned on"+style.RESET)
     try:
-        journal.write(style.GREEN+"Collecting GPS data..."+style.RESET)
+        log.info(style.GREEN+"Collecting GPS data..."+style.RESET)
         if ln[0]=="":
-            journal.write(style.RED+"GPS Error - Unable to collect GPS data(0)"+style.RESET)
+            log.info(style.RED+"GPS Error - Unable to collect GPS data(0)"+style.RESET)
     except:
-        journal.write(style.RED+"GPS Error - Unable to collect GPS data(1)"+style.RESET)
+        log.info(style.RED+"GPS Error - Unable to collect GPS data(1)"+style.RESET)
     try:
-        journal.write(style.GREEN+"Packaging Data..."+style.RESET)
+        log.info(style.GREEN+"Packaging Data..."+style.RESET)
         with open(str(event.src_path), 'r') as reader:
             message = reader.readlines()
         user = str(event.src_path)[str(event.src_path).rindex('/')+1:]
-        journal.write(style.GREEN+"USER: "+user+style.RESET)
-        journal.write(style.GREEN+"MESSAGE: "+str(message)[2:-4]+style.RESET)
-        journal.write(style.GREEN+"Creating directory..."+style.RESET)
+        log.info(style.GREEN+"USER: "+user+style.RESET)
+        log.info(style.GREEN+"MESSAGE: "+str(message)[2:-4]+style.RESET)
+        log.info(style.GREEN+"Creating directory..."+style.RESET)
         makepath='/home/pi/'+user
         os.system('mkdir -p \''+makepath+'\'')
-        journal.write(style.GREEN+"Dumping contents..."+style.RESET)
+        log.info(style.GREEN+"Dumping contents..."+style.RESET)
         with open(makepath+"/message.txt", "a") as messagefile:
             messagefile.write(str(message)[2:-4])
             for i in range(len(ln)):
@@ -154,18 +98,17 @@ def on_created(event):
         with zipfile.ZipFile(makepath+'.zip', 'w') as zipMe:        
           for file in user_zip:
             zipMe.write(file, compress_type=zipfile.ZIP_DEFLATED)
-        journal.write(style.GREEN+"Cleaning up..."+style.RESET)
+        log.info(style.GREEN+"Cleaning up..."+style.RESET)
         os.system('rm -r -f \''+makepath+'\'')
         os.system('rm -r -f \''+str(event.src_path)+'\'')
-        journal.write(style.GREEN+"DONE"+style.RESET)
+        log.info(style.GREEN+"DONE"+style.RESET)
         suppress = False
     except:
         suppress = False
-        journal.write(style.RED+"File write error"+style.RESET)
+        log.info(style.RED+"File write error"+style.RESET)
 
 if __name__ == "__main__":
-    ion_message_listener_thread = threading.Thread(target=ion_message_listener)
-    ion_message_listener_thread.start()
+    logCounter=0
     while(1):
         try:
             os.system('export TERM=xterm')
@@ -196,9 +139,13 @@ if __name__ == "__main__":
                             ln[5]="* "+url+"      *"
                             ln[6]="*"*(len(url)+9)
                             if not suppress:
-                                journal.write(style.YELLOW+raw.strip('\n')+style.RESET)
+                                log.info(style.YELLOW+raw.strip('\n')+style.RESET)
                         elif len(raw) != 0 and not suppress:
-                            journal.write(style.YELLOW+raw.strip('\n')+style.RESET)
+                            if logCounter > 20:
+                                log.info(style.YELLOW+raw.strip('\n')+style.RESET)
+                                logCounter=0
+                            else:
+                                logCounter+=1
             except KeyboardInterrupt:
                 my_observer.stop()
                 my_observer.join()
