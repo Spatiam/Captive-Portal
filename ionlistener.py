@@ -69,13 +69,15 @@ if __name__ == "__main__":
                         zipMe.write(file, compress_type=zipfile.ZIP_DEFLATED)
                     for file in filenames:
                       if file != "/home/pi/download.zip":
-                        os.system('rm -r -f '+file)
+                        log.info('rm -r -f \"'+file+"\"")
+                        os.system('rm -r -f \"'+file+"\"")
                     for i in range(10):
                         log.info(style.YELLOW+"bpsendfile to ipn:"+return_ipn+".1 in "+str(10-i)+"s"+style.RESET)
                         time.sleep(1)
                     send_command = "bpsendfile ipn:1.1 ipn:"+return_ipn+".1 /home/pi/download.zip"
                     log.info(style.GREEN+send_command+style.RESET)
                     os.system(send_command)
+                    os.system('rm -r -f download.zip')
                   except:
                     log.info(style.RED+"FAILED TO PACKAGE ZIP"+style.RESET)
                   log.info(style.GREEN+"RESTARTING bpsink process..."+style.RESET)

@@ -94,10 +94,11 @@ def on_created(event):
             for i in range(len(ln)):
                 messagefile.write("\n"+ln[i])
         os.system('mv /home/pi/image_capture.jpg ''\''+makepath+'/image_capture.jpg\'')
-        user_zip = [makepath]
-        with zipfile.ZipFile(makepath+'.zip', 'w') as zipMe:        
+        user_zip = [makepath+'/message.txt', makepath+'/image_capture.jpg']
+        with zipfile.ZipFile(makepath+'.zip', 'w') as zipMe:
           for file in user_zip:
-            zipMe.write(file, compress_type=zipfile.ZIP_DEFLATED)
+            if os.path.exists(file):
+              zipMe.write(file, compress_type=zipfile.ZIP_DEFLATED)
         log.info(style.GREEN+"Cleaning up..."+style.RESET)
         os.system('rm -r -f \''+makepath+'\'')
         os.system('rm -r -f \''+str(event.src_path)+'\'')
@@ -108,7 +109,6 @@ def on_created(event):
         log.info(style.RED+"File write error"+style.RESET)
 
 if __name__ == "__main__":
-    logCounter=0
     while(1):
         try:
             os.system('export TERM=xterm')
@@ -129,6 +129,7 @@ if __name__ == "__main__":
                         raw = ser.read(ser.in_waiting).decode('utf-8')
                         if raw[0:6] == "$GPRMC" and not "$GPVTG" in raw and raw.split(",")[2] != 'V':
                             latDD, lonDD, speed, date, time = parse(raw)
+                            log.info(style.YELLOW+"["+str(f"{latDD:.6f}")+","+str(f"{lonDD:.6f}")+"]"+style.RESET)
                             url = str("https://www.google.com/maps/place/"+str(f"{latDD:.6f}")+"+"+str(f"{lonDD:.6f}"))
                             ln[0]="*"*(len(url)+9)
                             ln[1]="* LATITUDE: "+str(f"{latDD:.6f}")+dg+" "*(6+len(url)-len(str(" LATITUDE: "+str(f"{latDD:.6f}"))))+"*"
@@ -137,18 +138,11 @@ if __name__ == "__main__":
                             ln[4]="* TIMESTAMP: "+date+" "+time+"GMT"+" "*(7+len(url)-len(str(" TIMESTAMP: "+date+" "+time+"GMT")))+"*"
                             ln[5]="* "+url+"      *"
                             ln[6]="*"*(len(url)+9)
-                            if not suppress:
-                                log.info(style.YELLOW+raw.strip('\n')+style.RESET)
-                        elif len(raw) != 0 and not suppress:
-                            if logCounter > 100:
-                                log.info(style.YELLOW+raw.strip('\n')+style.RESET)
-                                logCounter=0
-                            else:
-                                logCounter+=1
             except KeyboardInterrupt:
                 my_observer.stop()
                 my_observer.join()
-            except Exception:
+            except Exception as e:
+                log.info(style.RED+str(e)+style.RESET)
                 continue
         except:
             continue
