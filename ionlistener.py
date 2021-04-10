@@ -5,7 +5,7 @@ from systemd.journal import JournalHandler
 import datetime
 import serial
 import threading
-import subprocess
+import subprocess, signal
 import zipfile
 import glob
 import paho.mqtt.client as mqtt
@@ -42,7 +42,7 @@ if __name__ == "__main__":
     os.system('killm')
     os.system('ionstart -I /home/pi/ion-open-source-4.0.2/dtn/mule.rc')
     process = subprocess.Popen(['bpsink','ipn:1.1'], stdout=subprocess.PIPE)
-    log.info("ION_MESSAGE_LISTENER STARTED")
+    log.info(style.CYAN+"ION_MESSAGE_LISTENER STARTED"+style.RESET)
     while True:
         output = process.stdout.readline()
         if output == '' and process.poll() is not None:
@@ -54,6 +54,8 @@ if __name__ == "__main__":
                 true_output = output.decode('utf-8').strip()[1:-1]
                 log.info(style.GREEN+"ION MESSAGE:"+true_output+style.RESET)
                 if "download:" in true_output:
+                  log.info(style.RED+"STOPPING bpsink process..."+style.RESET)
+                  process.send_signal(signal.SIGINT)
                   try:
                     return_ipn = true_output.split(":")[-1]
                     homepath='/home/pi/*.zip'
@@ -76,6 +78,9 @@ if __name__ == "__main__":
                     os.system(send_command)
                   except:
                     log.info(style.RED+"FAILED TO PACKAGE ZIP"+style.RESET)
+                  log.info(style.GREEN+"RESTARTING bpsink process..."+style.RESET)
+                  process = subprocess.Popen(['bpsink','ipn:1.1'], stdout=subprocess.PIPE)
+                  log.info(style.CYAN+"ION_MESSAGE_LISTENER STARTED"+style.RESET)
             if lineCounter == 1:
                 try:
                     number = int(output.decode('utf-8').strip().split(" ")[-1].replace('.',''))
