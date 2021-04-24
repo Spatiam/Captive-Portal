@@ -23,6 +23,7 @@ echo -e "└──────────────────────�
 mkdir -p /var/www/html/images
 mkdir -p /var/www/html/passwords
 mkdir -p /var/www/html/files
+mkdir -P /home/pi/archive
 chmod 777 /var/www/html
 chmod 777 /var/www/html/passwords
 chmod 777 /var/www/html/images
@@ -147,7 +148,6 @@ sudo chmod 644 /lib/systemd/system/watchpack.service
 chmod +x /var/www/html/watchpack.py
 sudo systemctl daemon-reload
 sudo systemctl enable watchpack
-sudo systemctl start watchpack
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
@@ -233,7 +233,7 @@ sudo chmod 644 /lib/systemd/system/ionlistener.service
 chmod +x /var/www/html/ionlistener.py
 sudo systemctl daemon-reload
 sudo systemctl enable ionlistener
-sudo systemctl start ionlistener
+sudo pip install python-magic
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
