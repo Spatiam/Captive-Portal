@@ -43,7 +43,7 @@ if __name__ == "__main__":
     os.system('ionstop')
     time.sleep(5)
     os.system('(cd /home/pi && ionstart -I /home/pi/ion-open-source-4.0.2/dtn/mule.rc)')
-    os.sytem('sudo chmod 777 /tmp/ion.sdrlog')
+    os.system('sudo chmod 777 /tmp/ion.sdrlog')
     os.system('ipcs')
     process = subprocess.Popen(['bprecvfile','ipn:1.1', '1'], stdout=subprocess.PIPE)
     print(style.CYAN+"ION_BPRECVFILE STARTED"+style.RESET)
