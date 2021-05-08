@@ -42,10 +42,12 @@ if __name__ == "__main__":
         time.sleep(1)
     os.system('ionstop')
     time.sleep(5)
-    os.system('(cd /home/pi && ionstart -I /home/pi/ion-open-source-4.0.2/dtn/mule.rc)')
+    os.system('(cd /home/pi && sudo -u pi ionstart -I /home/pi/ion-open-source-4.0.2/dtn/mule.rc)')
     os.system('sudo chmod 777 /tmp/ion.sdrlog')
+    os.system('sudo chmod 777 /tmp')
+    os.system('sudo chmod o+rwx /tmp')
     os.system('ipcs')
-    process = subprocess.Popen(['bprecvfile','ipn:1.1', '1'], stdout=subprocess.PIPE)
+    process = subprocess.Popen(['sudo', '-u', 'pi', 'bprecvfile','ipn:1.1', '1'], stdout=subprocess.PIPE)
     print(style.CYAN+"ION_BPRECVFILE STARTED"+style.RESET)
     if not os.path.exists('/home/pi/ion.log'):
         print(style.RED+"ERROR: ion.log not located at /home/pi"+style.RESET)
@@ -107,7 +109,7 @@ if __name__ == "__main__":
                             print(style.YELLOW+"bpsendfile to ipn:"+return_ipn+".1 in "+str(10-i)+"s"+style.RESET)
                             time.sleep(1)
                         FS=open('/home/pi/ion.log', 'r')
-                        send_command = "bpsendfile ipn:1.1 ipn:"+return_ipn+".1 /home/pi/download.zip"
+                        send_command = "sudo -u pi bpsendfile ipn:1.1 ipn:"+return_ipn+".1 /home/pi/download.zip"
                         print(style.GREEN+send_command+style.RESET)
                         os.system(send_command)
                         sentPackage=False
@@ -121,8 +123,8 @@ if __name__ == "__main__":
                         print(style.RED+"FAILED TO PACKAGE ZIP"+style.RESET)
                     print(style.GREEN+"RESTARTING bprecvfile process..."+style.RESET)
                     time.sleep(10)
-                    process = subprocess.Popen(['bprecvfile','ipn:1.1', '1'], stdout=subprocess.PIPE)
+                    process = subprocess.Popen(['sudo', '-u', 'pi', 'bprecvfile','ipn:1.1', '1'], stdout=subprocess.PIPE)
                     print(style.CYAN+"ION_MESSAGE_LISTENER STARTED"+style.RESET)
                 else:
-                    process = subprocess.Popen(['bprecvfile','ipn:1.1', '1'], stdout=subprocess.PIPE)
+                    process = subprocess.Popen(['sudo', '-u', 'pi', 'bprecvfile','ipn:1.1', '1'], stdout=subprocess.PIPE)
     rc = process.poll()
