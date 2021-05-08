@@ -192,7 +192,7 @@ echo -e "\e[33m┌────────────────────�
 echo -e "|\e[39mBuilding Ion\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 tar -xvzf /home/pi/ion-open-source-4.0.2.tar.gz -C /home/pi
-(cd /home/pi/ion-open-source-4.0.2 && sudo -u $SUDO_USER ./configure)
+(cd /home/pi/ion-open-source-4.0.2 && ./configure)
 (cd /home/pi/ion-open-source-4.0.2 && sudo -u $SUDO_USER make)
 (cd /home/pi/ion-open-source-4.0.2 && sudo make install)
 sudo ldconfig
