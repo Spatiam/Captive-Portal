@@ -8,9 +8,11 @@ fi
 echo -e "\e[33m┌─────────────────────────────────────────"
 echo -e "|\e[39mTesting Non-sudo command status\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
-if [ "sudo -u $SUDO_USER whoami" -ne "pi" ]
-	then echo -e "\e[39m\e[31mNon-sudo test failed\e[39m"
-	exit
+sudo -u $SUDO_USER whoami
+var="$(sudo -u $SUDO_USER whoami)"
+if [ $var != "pi" ]
+        then echo -e "\e[39m\e[31mNon-sudo test failed\e[39m"
+        exit
 fi
 echo -e "\e[32mDONE"
 
