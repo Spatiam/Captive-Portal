@@ -34,7 +34,7 @@ echo -e "└──────────────────────�
 mkdir -p /var/www/html/images
 mkdir -p /var/www/html/passwords
 mkdir -p /var/www/html/files
-mkdir -P /home/pi/archive
+mkdir -p /home/pi/archive
 chmod 777 /var/www/html
 chmod 777 /var/www/html/passwords
 chmod 777 /var/www/html/images
