@@ -30,7 +30,10 @@ US
 ```
 
 ```
+**FOR MASTER
 git clone https://github.com/Spatiam/Captive-Portal.git
+**FOR FILECONFIGURATION
+git clone --branch fileConfiguration https://github.com/Spatiam/Captive-Portal.git
 ```
 
 ```
