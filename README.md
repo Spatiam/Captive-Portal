@@ -37,10 +37,6 @@ git clone --branch fileConfiguration https://github.com/Spatiam/Captive-Portal.g
 ```
 
 ```
-sudo -i
-```
-
-```
 sudo bash /home/pi/Captive-Portal/captiveportal.sh $0
 ```
 
