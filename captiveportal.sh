@@ -39,22 +39,22 @@ chmod 777 /var/www/html
 chmod 777 /var/www/html/passwords
 chmod 777 /var/www/html/images
 chmod 777 /var/www/html/files
-cp -u /home/pi/Captive-Portal/config_files/default_nginx /etc/nginx/sites-enabled/default
-cp -u /home/pi/Captive-Portal/config_files/journald.conf /etc/systemd/journald.conf
-cp -u /home/pi/Captive-Portal/php/index.php /var/www/html/index.php
-cp -u /home/pi/Captive-Portal/php/download.php /var/www/html/download.php
-cp -u /home/pi/Captive-Portal/php/submit.php /var/www/html/submit.php
-cp -u /home/pi/Captive-Portal/images/Android.png /var/www/html/images/Android.png
-cp -u /home/pi/Captive-Portal/images/spatiam.jpg /var/www/html/images/spatiam.jpg
-cp -u /home/pi/Captive-Portal/images/android_icon.png /var/www/html/images/android_icon.png
-cp -u /home/pi/Captive-Portal/images/app_design.png /var/www/html/images/app_design.png
-cp -u /home/pi/Captive-Portal/images/messaging_icon.png /var/www/html/images/messaging_icon.png
-cp -u /home/pi/Captive-Portal/images/spatiam_logo.png /var/www/html/images/spatiam_logo.png
-cp -u /home/pi/Captive-Portal/images/warning_icon.png /var/www/html/images/warning_icon.png
-cp -u /home/pi/Captive-Portal/php/submit.php /var/www/html/submit.php
-cp -u /home/pi/Captive-Portal/ion/DTN.apk /var/www/html/files/DTN.apk
-cp -u /home/pi/Captive-Portal/watchpack.py /var/www/html/watchpack.py
-cp -u /home/pi/Captive-Portal/ionlistener.py /var/www/html/ionlistener.py
+cp -f /home/pi/Captive-Portal/config_files/default_nginx /etc/nginx/sites-enabled/default
+cp -f /home/pi/Captive-Portal/config_files/journald.conf /etc/systemd/journald.conf
+cp -f /home/pi/Captive-Portal/php/index.php /var/www/html/index.php
+cp -f /home/pi/Captive-Portal/php/download.php /var/www/html/download.php
+cp -f /home/pi/Captive-Portal/php/submit.php /var/www/html/submit.php
+cp -f /home/pi/Captive-Portal/images/Android.png /var/www/html/images/Android.png
+cp -f /home/pi/Captive-Portal/images/spatiam.jpg /var/www/html/images/spatiam.jpg
+cp -f /home/pi/Captive-Portal/images/android_icon.png /var/www/html/images/android_icon.png
+cp -f /home/pi/Captive-Portal/images/app_design.png /var/www/html/images/app_design.png
+cp -f /home/pi/Captive-Portal/images/messaging_icon.png /var/www/html/images/messaging_icon.png
+cp -f /home/pi/Captive-Portal/images/spatiam_logo.png /var/www/html/images/spatiam_logo.png
+cp -f /home/pi/Captive-Portal/images/warning_icon.png /var/www/html/images/warning_icon.png
+cp -f /home/pi/Captive-Portal/php/submit.php /var/www/html/submit.php
+cp -f /home/pi/Captive-Portal/ion/DTN.apk /var/www/html/files/DTN.apk
+cp -f /home/pi/Captive-Portal/watchpack.py /var/www/html/watchpack.py
+cp -f /home/pi/Captive-Portal/ionlistener.py /var/www/html/ionlistener.py
 mv -u /home/pi/Captive-Portal/ion/ion-open-source-4.0.2.tar.gz /home/pi/ion-open-source-4.0.2.tar.gz
 echo -e "\e[32mDONE"
 
@@ -74,13 +74,13 @@ echo -e "\e[32mDONE"
 echo -e "\e[33m┌─────────────────────────────────────────"
 echo -e "|\e[39mConfiguring wlan0\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
-cp -u /home/pi/Captive-Portal/config_files/dhcpcd.conf /etc/dhcpcd.conf
+cp -f /home/pi/Captive-Portal/config_files/dhcpcd.conf /etc/dhcpcd.conf
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
 echo -e "|\e[39mConfiguring dnsmasq\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
-cp -u /home/pi/Captive-Portal/config_files/dnsmasq.conf /etc/dnsmasq.conf
+cp -f /home/pi/Captive-Portal/config_files/dnsmasq.conf /etc/dnsmasq.conf
 echo -e "\e[32mDONE"
 
 echo -e "\e[33m┌─────────────────────────────────────────"
@@ -98,7 +98,7 @@ echo -e "\e[32mDONE"
 echo -e "\e[33m┌─────────────────────────────────────────"
 echo -e "|\e[39mConfiguring hostapd\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
-cp -u /home/pi/Captive-Portal/config_files/hostapd.conf /etc/hostapd/hostapd.conf
+cp -f /home/pi/Captive-Portal/config_files/hostapd.conf /etc/hostapd/hostapd.conf
 sed -i -- 's/#DAEMON_CONF=""/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
 echo -e "\e[32mDONE"
 
@@ -192,6 +192,7 @@ echo -e "\e[33m┌────────────────────�
 echo -e "|\e[39mBuilding Ion\e[39m\e[33m"
 echo -e "└─────────────────────────────────────────\e[39m"
 tar -xvzf /home/pi/ion-open-source-4.0.2.tar.gz -C /home/pi
+cp -f /home/pi/Captive-Portal/ion/bpsendfile.c /home/pi/ion-open-source-4.0.2/bpv7/utils/bpsendfile.c
 (cd /home/pi/ion-open-source-4.0.2 && ./configure)
 (cd /home/pi/ion-open-source-4.0.2 && sudo -u $SUDO_USER make)
 (cd /home/pi/ion-open-source-4.0.2 && sudo make install)
